@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empower Illiterate</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar glass">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                <i class="fa-solid fa-hands-holding-circle"></i>
+                Empower Illiterate
+            </a>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active" data-target="home">Home</a>
+                <a href="#hiree" class="nav-link" data-target="hiree">Find Work</a>
+                <a href="#hirer" class="nav-link btn-primary nav-btn" data-target="hirer">Hire Workers</a>
+            </div>
+        </div>
+    </nav>
+
+    <main id="app-content"></main>
+
+    <!-- Home View Template -->
+    <template id="view-home">
+        <div class="view-container animate-fade-in">
+            <header class="hero">
+                <div class="hero-content">
+                    <h1>Empower India by Empowering <span class="highlight">Illiterate</span></h1>
+                    <p class="subtitle">A framework connecting skilled, uneducated individuals with those looking to hire them.</p>
+                    <div class="hero-actions">
+                        <a href="#hiree" class="btn btn-secondary"><i class="fa-solid fa-briefcase"></i> Looking for work</a>
+                        <a href="#hirer" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i> I want to hire</a>
+                    </div>
+                </div>
+                <div class="hero-graphics">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                </div>
+            </header>
+            
+            <section class="features">
+                <div class="feature-card glass">
+                    <div class="feature-icon"><i class="fa-solid fa-users"></i></div>
+                    <h3>For Workers (Hiree)</h3>
+                    <p>Register using helping centers with your skill and phone number. Get an ID and get hired.</p>
+                </div>
+                <div class="feature-card glass">
+                    <div class="feature-icon"><i class="fa-solid fa-handshake"></i></div>
+                    <h3>For Hirers</h3>
+                    <p>Search for painters, drivers, and plumbers. Filter by location and contact directly.</p>
+                </div>
+            </section>
+        </div>
+    </template>
+
+    <!-- Hiree View Template -->
+    <template id="view-hiree">
+        <div class="view-container animate-fade-in form-view">
+            <div class="form-wrapper glass">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="register">New Registration</button>
+                    <button class="tab-btn" data-tab="update">Update Profile</button>
+                </div>
+                
+                <form id="form-register" class="tab-content active">
+                    <h2>Register for Work</h2>
+                    <div class="input-group">
+                        <label><i class="fa-solid fa-user"></i> Full Name</label>
+                        <input type="text" id="reg-name" placeholder="E.g. Ramesh" required>
+                    </div>
+                    <div class="input-group">
+                        <label><i class="fa-solid fa-phone"></i> Phone Number</label>
+                        <input type="tel" id="reg-phone" placeholder="10-digit number" required>
+                    </div>
+                    <div class="input-group">
+                        <label><i class="fa-solid fa-wrench"></i> Select Work (Tap Image)</label>
+                        <div class="skill-grid" id="reg-skill-grid">
+                            <div class="skill-card" data-skill="Carpentry"><img src="assets/images/carpentry.svg" alt="Carpentry"><br><span>Carpentry</span></div>
+                            <div class="skill-card" data-skill="Construction Worker"><img src="assets/images/construction.svg" alt="Construction"><br><span>Construction</span></div>
+                            <div class="skill-card" data-skill="Driving"><img src="assets/images/driving.svg" alt="Driving"><br><span>Driving</span></div>
+                            <div class="skill-card" data-skill="Gardener"><img src="assets/images/gardener.svg" alt="Gardener"><br><span>Gardener</span></div>
+                            <div class="skill-card" data-skill="Helper"><img src="assets/images/helper.svg" alt="Helper"><br><span>Helper</span></div>
+                            <div class="skill-card" data-skill="Maid"><img src="assets/images/maid.svg" alt="Maid"><br><span>Maid</span></div>
+                            <div class="skill-card" data-skill="Plumbing"><img src="assets/images/plumbing.svg" alt="Plumbing"><br><span>Plumbing</span></div>
+                            <div class="skill-card" data-skill="Tailor"><img src="assets/images/tailor.svg" alt="Tailor"><br><span>Tailor</span></div>
+                            <div class="skill-card" data-skill="Welder"><img src="assets/images/welder.svg" alt="Welder"><br><span>Welder</span></div>
+                        </div>
+                        <input type="hidden" id="reg-skill" required>
+                    </div>
+                    <div class="input-group">
+                        <label><i class="fa-solid fa-location-dot"></i> Service Location</label>
+                        <div class="location-badge"><i class="fa-solid fa-map-pin"></i> Hyderabad</div>
+                        <input type="hidden" id="reg-location" value="Hyderabad">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Generate Work ID</button>
+                </form>
+
+                <form id="form-update" class="tab-content hidden">
+                    <h2>Update Details</h2>
+                    <div class="input-group">
+                        <label>Work ID</label>
+                        <input type="text" id="upd-id" required>
+                    </div>
+                    <button type="button" id="btn-otp" class="btn btn-secondary btn-block">Send OTP</button>
+                </form>
+
+                <div id="hiree-success" class="alert-success hidden">
+                    <p>Registration Successful! ID: <strong id="generated-id" class="highlight"></strong></p>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Hirer View Template -->
+    <template id="view-hirer">
+        <div class="view-container animate-fade-in split-view">
+            <aside class="sidebar glass">
+                <div id="hirer-auth" class="auth-section">
+                    <h2>Hirer Login</h2>
+                    <form id="form-hirer-login">
+                        <div class="input-group">
+                            <label>Phone / Email</label>
+                            <input type="text" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                    </form>
+                </div>
+                
+                <div id="hirer-filters" class="filters-section hidden">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3 style="margin: 0;">Find Workers</h3>
+                        <a href="#logout" class="btn" style="background:transparent; color: var(--danger); border: 1px solid var(--danger); padding: 5px 15px; font-size: 0.8rem;">
+                            <i class="fa-solid fa-right-from-bracket"></i> Logout
+                        </a>
+                    </div>
+                    <div class="input-group">
+                        <label>Skill Needed</label>
+                        <select id="filter-skill">
+                            <option value="All">All Skills</option>
+                            <option value="Carpentry">Carpentry</option>
+                            <option value="Construction Worker">Construction Worker</option>
+                            <option value="Driving">Driving</option>
+                            <option value="Gardener">Gardener</option>
+                            <option value="Helper">Helper</option>
+                            <option value="Maid">Maid</option>
+                            <option value="Plumbing">Plumbing</option>
+                            <option value="Tailor">Tailor</option>
+                            <option value="Welder">Welder</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Location</label>
+                        <div class="location-badge"><i class="fa-solid fa-map-pin"></i> Hyderabad Only</div>
+                        <input type="hidden" id="filter-location" value="Hyderabad">
+                    </div>
+                    <button id="btn-search" class="btn btn-secondary btn-block">Search</button>
+                </div>
+            </aside>
+            
+            <div class="dashboard-content">
+                <div class="search-header">
+                    <h2>Available Workers <span id="worker-count" class="badge">0</span></h2>
+                </div>
+                <div id="workers-list" class="workers-grid">
+                    <div class="empty-state" id="workers-empty">Please login and search to view workers.</div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Logout View Template -->
+    <template id="view-logout">
+        <div class="view-container animate-fade-in" style="text-align: center; min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <i class="fa-solid fa-right-from-bracket" style="font-size: 4rem; color: var(--primary); margin-bottom: 20px;"></i>
+            <h2>You have been logged out.</h2>
+            <p style="margin: 20px 0; color: rgba(255, 255, 255, 0.8);">Thank you for using Empower Illiterate.</p>
+            <a href="#home" class="btn btn-primary"><i class="fa-solid fa-home"></i> Return to Home</a>
+        </div>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+</html>
